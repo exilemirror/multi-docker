@@ -19,9 +19,9 @@ after_success:
     - docker build -t exilemirror/multi-worker ./worker
 
 ## Push Prod Docker images to Docker Hub
-    # Log in to docker CLI
+    ## Log in to docker CLI
     - echo '$DOCKER_PWD' | docker login --username '$DOCKER_ID' --password-stdin
-    # Push to docker hub
+    ## Push to docker hub
     - docker push exilemirror/multi-client
     - docker push exilemirror/multi-nginx
     - docker push exilemirror/multi-server
