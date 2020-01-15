@@ -20,7 +20,7 @@ after_success:
 
 ## Push Prod Docker images to Docker Hub
     ## Log in to docker CLI
-    - echo '$DOCKER_PWD' | docker login --username '$DOCKER_ID' --password-stdin
+    - echo '$DOCKER_PWD' | docker login --username exilemirror --password-stdin
     ## Push to docker hub
     - docker push exilemirror/multi-client
     - docker push exilemirror/multi-nginx
