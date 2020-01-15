@@ -1,0 +1,27 @@
+sudo: required
+services:
+    - docker
+
+## Build Dev Docker images
+before_install:
+    - docker build -t exilemirror/react-test -f ./client/Dockerfile.dev ./client
+
+## Run test script on Dev Docker image
+script:
+    - docker run exilemirror/react-test npm test -- --coverage
+
+## Build Prod Docker images
+after_success:
+    - docker build -t exilemirror/multi-client ./client
+    - docker build -t exilemirror/multi-nginx ./nginx
+    - docker build -t exilemirror/multi-server ./server
+    - docker build -t exilemirror/multi-worker ./worker
+
+## Push Prod Docker images to Docker Hub
+    # Log in to docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+    # Push to docker hub
+    - docker push exilemirror/multi-client
+    - docker push exilemirror/multi-nginx
+    - docker push exilemirror/multi-server
+    - docker push exilemirror/multi-worker
