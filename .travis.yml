@@ -8,7 +8,8 @@ before_install:
 
 ## Run test script on Dev Docker image
 script:
-    - docker run exilemirror/react-test npm test -- --coverage
+    - docker run -e CI=true exilemirror/react-test npm test
+    # - docker run exilemirror/react-test npm test -- --coverage
 
 ## Build Prod Docker images
 after_success:
